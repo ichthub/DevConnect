@@ -1,5 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+
 // Our Routes
 const profileRoute = require('./routes/api/profile');
 const userRoute = require('./routes/api/user');
@@ -8,6 +11,8 @@ const postsRoute = require('./routes/api/posts');
 const app = express();
 const db = require('./config/keys').mongoURI;
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 // solve connection to DB issues
 const options = {
   autoIndex: false, // Don't build indexes
@@ -19,12 +24,18 @@ const options = {
 };
 
 mongoose
-  .connect(db, options)
+  .connect(
+    db,
+    options
+  )
   .then(() => console.log('connection to DB was established successfully'))
   .catch(err =>
     console.log(`An error was accured while trying to connect to DB ${err}`)
   );
-app.get('/', (req, res) => res.send('hello from express app 45'));
+// passport auth middleware
+app.use(passport.initialize());
+require('./config/passport')(passport);
+
 /*
 A route will match any path that follows its path immediately.
 For example: app.use('/api/users', ...) will match “/api/users/test”, “/api/users/test/images”,

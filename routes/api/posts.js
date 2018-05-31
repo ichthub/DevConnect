@@ -1,6 +1,6 @@
 const express = require('express');
-const router = express.Router();
 
+const router = express.Router();
 /*
     @Route  /api/posts/test
     @Desc   Test posts route
