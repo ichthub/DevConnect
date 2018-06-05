@@ -9,7 +9,7 @@ const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = SecretKey;
 module.exports = passport => {
-  // the jwt payload is the payload you assigned earlier in user.js line 70
+  // the jwt payload is the payload you assigned earlier in user.js in bcrypt func
   passport.use(
     new Strategy(opts, (payload, done) => {
       // console.log(payload);

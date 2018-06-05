@@ -76,6 +76,7 @@ router.post('/login', (req, res) => {
   const { email, password } = req.body;
   User.findOne({ email }).then(user => {
     // user contains the founded record
+    // console.log('user is ', user);
     if (!user) {
       errors.email = 'User email not found';
 
@@ -89,7 +90,7 @@ router.post('/login', (req, res) => {
           name: user.name,
           avatar: user.avatar
         };
-        jwt.sign(payload, SecretKey, { expiresIn: 3600 }, (err, token) => {
+        jwt.sign(payload, SecretKey, { expiresIn: 3600 * 24 }, (err, token) => {
           if (!err) {
             res.json({
               success: true,
