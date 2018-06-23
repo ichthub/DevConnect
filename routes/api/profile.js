@@ -95,7 +95,7 @@ router.get('/all', (req, res) => {
     .populate('user', ['name,avatar]'])
     .then(profile => {
       if (!profile) {
-        err.noProfile = 'There are no profiles yet';
+        err.noProfile = 'There are no profiles yets';
         res.status(404).json(err);
       }
       res.json(profile);
