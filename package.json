@@ -1,7 +1,7 @@
 {
-  "name": "devconnecter",
+  "name": "Bricoly",
   "version": "1.0.0",
-  "description": "Social media for developers",
+  "description": "Services market place",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
@@ -15,10 +15,11 @@
     "url": "git+https://github.com/ichthub/DevConnect.git"
   },
   "keywords": [
-    "Social",
-    "media",
+    "Market",
+    "place",
     "for",
-    "developers"
+    "service",
+    "providers"
   ],
   "author": "Hassan Houmaid",
   "license": "MIT",

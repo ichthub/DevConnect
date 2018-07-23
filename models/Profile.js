@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+// Create Schema
 const ProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
@@ -38,19 +39,19 @@ const ProfileSchema = new Schema({
   experience: [
     {
       title: {
-        type: String
-        // required: true
+        type: String,
+        required: true
       },
       company: {
-        type: String
-        // required: true
+        type: String,
+        required: true
       },
       location: {
         type: String
       },
       from: {
-        type: Date
-        // required: true
+        type: Date,
+        required: true
       },
       to: {
         type: Date
@@ -59,7 +60,7 @@ const ProfileSchema = new Schema({
         type: Boolean,
         default: false
       },
-      desciption: {
+      description: {
         type: String
       }
     }
@@ -67,20 +68,20 @@ const ProfileSchema = new Schema({
   education: [
     {
       school: {
-        type: String
-        // required: true
+        type: String,
+        required: true
       },
       degree: {
-        type: String
-        // required: true
+        type: String,
+        required: true
       },
       fieldofstudy: {
-        type: String
-        // required: true
+        type: String,
+        required: true
       },
       from: {
-        type: Date
-        // required: true
+        type: Date,
+        required: true
       },
       to: {
         type: Date
@@ -89,31 +90,26 @@ const ProfileSchema = new Schema({
         type: Boolean,
         default: false
       },
-      desciption: {
+      description: {
         type: String
       }
     }
   ],
   social: {
     youtube: {
-      type: String,
-      required: true
+      type: String
+    },
+    twitter: {
+      type: String
     },
     facebook: {
-      type: String,
-      required: true
-    },
-    twiter: {
-      type: String,
-      required: true
-    },
-    instagram: {
-      type: String,
-      required: true
+      type: String
     },
     linkedin: {
-      type: String,
-      required: true
+      type: String
+    },
+    instagram: {
+      type: String
     }
   },
   date: {

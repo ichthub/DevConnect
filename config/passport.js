@@ -12,7 +12,6 @@ module.exports = passport => {
   // the jwt payload is the payload you assigned earlier in user.js in bcrypt func
   passport.use(
     new Strategy(opts, (payload, done) => {
-      // console.log(payload);
       User.findById(payload.id)
         .then(user => {
           if (user) {

@@ -36,7 +36,8 @@ router.post('/register', (req, res) => {
     const avatar = gravatar.url(req.body.email, {
       s: '200', // size
       r: 'pg', // rating
-      d: '404' // default
+      d: 'identicon',
+      forcedefault: 'y'
     });
     const newUser = new User({
       name: req.body.name,
@@ -57,7 +58,7 @@ router.post('/register', (req, res) => {
         newUser
           .save()
           .then(users => res.json(users))
-          .catch(error => console.log(error));
+          .catch(error => res.json(error));
       });
     });
   });
@@ -75,8 +76,6 @@ router.post('/login', (req, res) => {
   }
   const { email, password } = req.body;
   User.findOne({ email }).then(user => {
-    // user contains the founded record
-    // console.log('user is ', user);
     if (!user) {
       errors.email = 'User email not found';
 

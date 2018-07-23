@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const passport = require('passport');
 
 const router = express.Router();
@@ -21,7 +21,6 @@ router.get(
   (req, res) => {
     const err = {};
     // user info can be found in req.user
-    // console.log(req.user.id);
     Profile.findOne({ user: req.user.id })
       .populate('user', ['name', 'avatar'])
       .exec((er, profile) => {
@@ -46,9 +45,8 @@ router.get(
 router.get('/handle/:handle', (req, res) => {
   const err = {};
   // accessing params object
-  console.log(req.params);
   Profile.findOne({ handle: req.params.handle })
-    .populate('user', ['name,avatar]'])
+    .populate('user', ['name', 'avatar'])
     .then(profile => {
       if (!profile) {
         err.noProfile = 'There is no profile for this handle';
@@ -70,7 +68,7 @@ router.get('/user/:user_id', (req, res) => {
   const err = {};
   // accessing params object
   Profile.findOne({ user: req.params.user_id })
-    .populate('user', ['name,avatar]'])
+    .populate('user', ['name','avatar'])
     .then(profile => {
       if (!profile) {
         err.noProfile = 'There is no profile for this user id';
@@ -92,7 +90,7 @@ router.get('/user/:user_id', (req, res) => {
 router.get('/all', (req, res) => {
   const err = {};
   Profile.find()
-    .populate('user', ['name,avatar]'])
+    .populate('user', ['name', 'avatar'])
     .then(profile => {
       if (!profile) {
         err.noProfile = 'There are no profiles yets';
@@ -134,7 +132,7 @@ router.post(
       skills,
       youtube,
       facebook,
-      twiter,
+      twitter,
       instagram,
       linkedin
     } = req.body;
@@ -172,8 +170,8 @@ router.post(
     if (facebook) {
       profileFields.social.facebook = facebook;
     }
-    if (twiter) {
-      profileFields.social.twiter = twiter;
+    if (twitter) {
+      profileFields.social.twitter = twitter;
     }
     if (instagram) {
       profileFields.social.instagram = instagram;
@@ -268,7 +266,7 @@ router.post(
         profile.save().then(p => res.json({ p }));
       })
       .catch(err => {
-        console.log('ERRRRRRRROUR', err);
+        res.json(err);
       });
   }
 );

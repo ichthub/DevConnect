@@ -8,14 +8,11 @@ const vaidateProfile = ({
   youtube,
   website,
   facebook,
-  twiter,
+  twitter,
   instagram,
   linkedin
 }) => {
   const errors = {};
-  //   const pass = '  ';
-  //   const res = !isEmpty(pass) ? pass : '';
-  //   console.log(res);
   /* eslint no-underscore-dangle: "error" */
   const _handle = !isEmpty(handle) ? handle : '';
   const _status = !isEmpty(status) ? status : '';
@@ -61,9 +58,9 @@ const vaidateProfile = ({
     }
   }
   // For Twiter
-  if (!isEmpty(twiter)) {
-    if (!validator.isURL(twiter)) {
-      errors.twiter = 'Not a valid URL';
+  if (!isEmpty(twitter)) {
+    if (!validator.isURL(twitter)) {
+      errors.twitter = 'Not a valid URL';
     }
   }
   // For Linkedin
@@ -72,6 +69,7 @@ const vaidateProfile = ({
       errors.linkedin = 'Not a valid URL';
     }
   }
+
   /* eslint no-underscore-dangle: 0 */
 
   return {
