@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // solve connection to DB issues
 const options = {
+  useNewUrlParser: true,
   autoIndex: false, // Don't build indexes
   reconnectTries: 100, // Never stop trying to reconnect
   reconnectInterval: 500, // Reconnect every 500ms
