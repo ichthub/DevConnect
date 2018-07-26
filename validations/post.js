@@ -3,7 +3,7 @@ const isEmpty = require('./isEmpty');
 
 const vaidatePost = ({ text }) => {
   /* eslint no-underscore-dangle: "error" */
-  const errors = {};
+  let errors = {};
   const _text = !isEmpty(text) ? text : '';
 
   if (!validator.isLength(_text, { min: 10, max: 300 })) {

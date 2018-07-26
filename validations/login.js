@@ -9,14 +9,14 @@ const vaidateLogin = ({ email, password }) => {
 
   // For Email
   if (!validator.isEmail(_email)) {
-    errors.email = 'Invalid email';
+    errors.emaili = 'Invalid email';
   }
   if (validator.isEmpty(_email)) {
-    errors.email = 'Email field is required';
+    errors.emaili = 'Email field is required';
   }
   // For password
   if (validator.isEmpty(_password)) {
-    errors.password = 'Password field is required';
+    errors.passwordi = 'Password field is required';
   }
   /* eslint no-underscore-dangle:0 */
 

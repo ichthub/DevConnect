@@ -30,6 +30,9 @@ class ProfileItem extends Component {
                 <span>{profile.location}</span>
               )}
             </p>
+            <p>
+              {isEmpty(profile.phone) ? null : <span>{profile.phone}</span>}
+            </p>
             <Link to={`/profile/${profile.handle}`} className="btn btn-info">
               View Profile
             </Link>

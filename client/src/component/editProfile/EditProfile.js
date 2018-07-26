@@ -20,6 +20,7 @@ class EditProfile extends Component {
       profile.handle = !isEmpty(profile.handle) ? profile.handle : '';
       profile.website = !isEmpty(profile.website) ? profile.website : '';
       profile.location = !isEmpty(profile.location) ? profile.location : '';
+      profile.phone = !isEmpty(profile.phone) ? profile.phone : '';
       profile.status = !isEmpty(profile.status) ? profile.status : '';
       profile.bio = !isEmpty(profile.bio) ? profile.bio : '';
       // profile.social = !isEmpty(profile.social) ? profile.social : {};
@@ -54,7 +55,8 @@ class EditProfile extends Component {
         facebook: profile.social.facebook,
         linkedin: profile.social.linkedin,
         youtube: profile.social.youtube,
-        instagram: profile.social.instagram
+        instagram: profile.social.instagram,
+        phone: profile.phone
       };
     }
     if (props.errors !== state.errors) {
@@ -82,6 +84,7 @@ class EditProfile extends Component {
       linkedin: '',
       youtube: '',
       instagram: '',
+      phone: '',
       errors: {}
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -108,7 +111,8 @@ class EditProfile extends Component {
       facebook: this.state.facebook,
       linkedin: this.state.linkedin,
       youtube: this.state.youtube,
-      instagram: this.state.instagram
+      instagram: this.state.instagram,
+      phone: this.state.phone
     };
     this.props.createProfile(profileData, this.props.history);
   }
@@ -227,6 +231,14 @@ class EditProfile extends Component {
                   onChange={this.onChangeHandler}
                   error={errors.location}
                   info="City or city & state suggested (eg. Boston, MA)"
+                />
+                <TextFieldGroup
+                  placeholder="Phone"
+                  name="phone"
+                  value={this.state.phone}
+                  onChange={this.onChangeHandler}
+                  error={errors.phone}
+                  info="Phone number"
                 />
                 <TextFieldGroup
                   placeholder="* Skills"

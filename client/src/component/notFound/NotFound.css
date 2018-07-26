@@ -35,7 +35,7 @@
   position: relative;
   font-size: 20px;
 }
-.text {
+text {
   font-size: 70px;
   text-align: center;
   position: relative;
@@ -76,14 +76,4 @@ hr {
   width: 420px;
   height: 10px;
   z-index: -10;
-}
-
-hr:after {
-  content: '\2022';
-  display: inline-block;
-  position: relative;
-  top: -0.75em;
-  font-size: 2em;
-  padding: 0 0.2em;
-  background: #33cc99;
 }

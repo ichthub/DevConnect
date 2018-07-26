@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const passport = require('passport');
 const Post = require('../../models/post');
 const Profile = require('../../models/Profile');
@@ -20,16 +20,17 @@ router.post(
     const { isValid, errors } = ValidatePosts(req.body);
     if (!isValid) {
       res.status(400).json(errors);
+    } else {
+      const newPost = new Post({
+        text: req.body.text,
+        name: req.body.name,
+        avatar: req.body.avatar,
+        user: req.user.id
+      });
+      newPost.save().then(post => {
+        res.json(post);
+      });
     }
-    const newPost = new Post({
-      text: req.body.text,
-      name: req.body.name,
-      avatar: req.body.avatar,
-      user: req.user.id
-    });
-    newPost.save().then(post => {
-      res.json(post);
-    });
   }
 );
 
@@ -67,7 +68,7 @@ router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Profile.findOne({ user: req.user.id }).then(profile => {
+    Profile.findOne({ user: req.user.id }).then(() => {
       Post.findById(req.params.id)
         .then(post => {
           // check for post owners
@@ -101,7 +102,7 @@ router.post(
   '/like/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Profile.findOne({ user: req.user.id }).then(profile => {
+    Profile.findOne({ user: req.user.id }).then(() => {
       Post.findById(req.params.id)
         .then(post => {
           // check if the user has already liked the post
@@ -114,7 +115,7 @@ router.post(
           // add to the post likes
           post.like.unshift({ user: req.user.id });
 
-          return post.save().then(pst => res.send().json(pst));
+          return post.save().then(pst => res.json(pst));
         })
         .catch(err =>
           res.status(404).json({ postNotFound: 'post not found', er: err })
@@ -132,7 +133,7 @@ router.post(
   '/unlike/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Profile.findOne({ user: req.user.id }).then(profile => {
+    Profile.findOne({ user: req.user.id }).then(() => {
       Post.findById(req.params.id)
         .then(post => {
           // check if the user had liked the post
@@ -172,7 +173,7 @@ router.post(
     // We only need to verifity the text field so we can reuse the post validation
     const { isValid, errors } = ValidatePosts(req.body);
     if (!isValid) {
-      res.status(400).json(errors);
+      return res.status(400).json(errors);
     }
     Post.findById(req.params.id)
       .then(post => {

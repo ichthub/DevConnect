@@ -10,19 +10,32 @@ const vaidateProfile = ({
   facebook,
   twitter,
   instagram,
-  linkedin
+  linkedin,
+  phone
 }) => {
   const errors = {};
   /* eslint no-underscore-dangle: "error" */
   const _handle = !isEmpty(handle) ? handle : '';
   const _status = !isEmpty(status) ? status : '';
   const _skills = !isEmpty(skills) ? skills : '';
+  const _phone = !isEmpty(phone) ? phone : '';
+
   // For handle
   if (validator.isEmpty(_handle)) {
     errors.handle = 'Handle field is required';
   }
   if (!validator.isLength(_handle, { min: 2, max: 40 })) {
     errors.handle = 'Handle must be between 2 and 40';
+  }
+  // For phone
+  if (validator.isEmpty(_phone)) {
+    errors.phone = 'Phone field is required';
+  }
+  if (!validator.isLength(_phone, { min: 10, max: 10 })) {
+    errors.phone = 'Phone must be 10 digits';
+  }
+  if (!_phone.match(/^\d{10}$/)) {
+    errors.phone = 'Incorrect phone number';
   }
   // For status
   if (validator.isEmpty(_status)) {

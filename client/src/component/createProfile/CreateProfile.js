@@ -34,6 +34,7 @@ class CreateProfile extends Component {
       linkedin: '',
       youtube: '',
       instagram: '',
+      phone: '',
       errors: {}
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -58,7 +59,8 @@ class CreateProfile extends Component {
       facebook: this.state.facebook,
       linkedin: this.state.linkedin,
       youtube: this.state.youtube,
-      instagram: this.state.instagram
+      instagram: this.state.instagram,
+      phone: this.state.phone
     };
     this.props.createProfile(profileData, this.props.history);
   }
@@ -162,6 +164,14 @@ class CreateProfile extends Component {
                   onChange={this.onChangeHandler}
                   error={errors.company}
                   info="This may be your company or the one you work for"
+                />
+                <TextFieldGroup
+                  placeholder="Phone number"
+                  name="phone"
+                  value={this.state.phone}
+                  onChange={this.onChangeHandler}
+                  error={errors.phone}
+                  info="Your phone number"
                 />
                 <TextFieldGroup
                   placeholder="Website"

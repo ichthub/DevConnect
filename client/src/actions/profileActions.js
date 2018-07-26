@@ -27,7 +27,6 @@ export const getCurrentProfile = () => dispatch => {
         type: GET_PROFILE,
         payload: res.data
       });
-      // console.log('Res =>', res.data);
     })
     .catch(() =>
       dispatch({
@@ -54,6 +53,25 @@ export const getProfileByHandle = handle => dispatch => {
         payload: null
       });
     });
+};
+
+// get profiles by status
+export const getProfilesByStatus = status => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get(`/api/profile/status/${status}`)
+    .then(res => {
+      dispatch({
+        type: GET_PROFILES,
+        payload: res.data
+      });
+    })
+    .catch(() =>
+      dispatch({
+        type: GET_PROFILES,
+        payload: {}
+      })
+    );
 };
 
 // Get all profiles

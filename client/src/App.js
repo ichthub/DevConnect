@@ -3,25 +3,31 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwtDecode from 'jwt-decode';
 import store from './Store';
+import PrivateRoute from './component/common/PrivateRoute';
 
-import EditProfile from './component/editProfile/EditProfile';
+// USER
 import setAuthToken from './utils/setAuth';
 import { setCurrentUser, logoutUser } from './actions/authAction';
 import { clearCurrentProfile } from './actions/profileActions';
+import Register from './component/auth/Register';
+import Login from './component/auth/Login';
+// Layout
+import './App.css';
 import Navbar from './component/layout/Navbar';
 import Footer from './component/layout/Footer';
 import Landing from './component/layout/Landing';
-import Login from './component/auth/Login';
-import Register from './component/auth/Register';
 import Dashboard from './component/dashboard/Dashboard';
+import NotFound from './component/notFound/NotFound';
+// Profile
 import CreateProfile from './component/createProfile/CreateProfile';
+import EditProfile from './component/editProfile/EditProfile';
 import AddExperience from './component/addExperience/AddExperience';
 import AddEducation from './component/addEducation/AddEducation';
-import PrivateRoute from './component/common/PrivateRoute';
 import Profiles from './component/profiles/Profiles';
-import Profile from './component/profile/Profile';
-import NotFound from './component/notFound/NotFound';
-import './App.css';
+import Profile from './component/profiles/profile/Profile';
+// Post
+import Posts from './component/posts/Posts';
+import Post from './component/posts/post/Post';
 
 // store the token to avoid losing it after page reload
 if (localStorage.jwtToken) {
@@ -52,42 +58,37 @@ class App extends Component {
             <Navbar />
             <Route exact path="/" component={Landing} />
             <div className="container">
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/profiles" component={Profiles} />
-              <Route exact path="/profile/:handle" component={Profile} />
               <Switch>
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/profiles" component={Profiles} />
+                <Route exact path="/profile/:handle" component={Profile} />
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              </Switch>
-              <Switch>
                 <PrivateRoute
                   exact
                   path="/create-profile"
                   component={CreateProfile}
                 />
-              </Switch>
-              <Switch>
                 <PrivateRoute
                   exact
                   path="/edit-profile"
                   component={EditProfile}
                 />
-              </Switch>
-              <Switch>
                 <PrivateRoute
                   exact
                   path="/add-experience"
                   component={AddExperience}
                 />
-              </Switch>
-              <Switch>
                 <PrivateRoute
                   exact
                   path="/add-education"
                   component={AddEducation}
                 />
+                <PrivateRoute exact path="/feed" component={Posts} />
+                <PrivateRoute exact path="/post/:id" component={Post} />
+                <Route path="/not-found" component={NotFound} />
+                <Route component={NotFound} />
               </Switch>
-              <Route exact path="/not-found" component={NotFound} />
             </div>
             <Footer />
           </div>

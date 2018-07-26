@@ -43,7 +43,7 @@ For example: app.use('/api/users', ...) will match “/api/users/test”, “/ap
 for more: https://expressjs.com/en/api.html#app.use
 */
 app.use('/api/users', userRoute);
-app.use('/api/post', postsRoute);
+app.use('/api/posts', postsRoute);
 app.use('/api/profile', profileRoute);
 
 const PORT = process.env.PORT || 5000;

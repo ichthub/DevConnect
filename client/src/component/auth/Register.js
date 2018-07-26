@@ -98,7 +98,11 @@ class Register extends Component {
                   value={this.state.passwordConfirmation}
                   isDisabled={false}
                 />
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <input
+                  type="submit"
+                  className="btn btn-info btn-block mt-4"
+                  value="Submit"
+                />
               </form>
             </div>
           </div>

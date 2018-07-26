@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import ProfileHeader from './ProfileHeader';
 import ProfileAbout from './ProfileAbout';
 import ProfileCreds from './ProfileCred';
-import Spinner from '../common/spinner/spinner';
-import { getProfileByHandle } from '../../actions/profileActions';
+import Spinner from '../../common/spinner/spinner';
+import { getProfileByHandle } from '../../../actions/profileActions';
 
 class Profile extends Component {
   componentDidMount() {
@@ -15,7 +15,6 @@ class Profile extends Component {
     }
   }
   componentWillReceiveProps(nextProps) {
-    console.log('wireciev');
     if (nextProps.profile.profile === null && this.props.profile.loading) {
       this.props.history.push('/not-found');
     }
