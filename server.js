@@ -48,6 +48,7 @@ app.use('/api/posts', postsRoute);
 app.use('/api/profile', profileRoute);
 // Serve static files when in production
 if (process.env.NODE_ENV === 'production') {
+  console.log('from production');
   // Set static folder
   app.use(express.static(path.join(__dirname, 'client', 'build')));
 
