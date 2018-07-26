@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const path = require('path');
 
 // Our Routes
 const profileRoute = require('./routes/api/profile');
@@ -45,6 +46,15 @@ for more: https://expressjs.com/en/api.html#app.use
 app.use('/api/users', userRoute);
 app.use('/api/posts', postsRoute);
 app.use('/api/profile', profileRoute);
+// Serve static files when in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`the server is running on port ${PORT}`));
