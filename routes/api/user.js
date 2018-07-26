@@ -5,7 +5,7 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 
 const router = express.Router();
-const { SecretKey } = require('../../config/keys');
+const keys = require('../../config/keys');
 const User = require('../../models/User'); // load User model
 const validateRegisterInput = require('../../validations/register');
 const validateLoginInput = require('../../validations/login');
@@ -89,7 +89,7 @@ router.post('/login', (req, res) => {
           name: user.name,
           avatar: user.avatar
         };
-        jwt.sign(payload, SecretKey, { expiresIn: 3600 * 24 }, (err, token) => {
+        jwt.sign(payload, keys.SecretKey, { expiresIn: 3600 * 24 }, (err, token) => {
           if (!err) {
             res.json({
               success: true,
