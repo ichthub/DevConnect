@@ -2,5 +2,3 @@
 package-lock.json
 /.tmp.drivedownload
 /config/keys_dev.js
-/config/keys_prod.js
-/config/keys.js

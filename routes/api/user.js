@@ -89,16 +89,21 @@ router.post('/login', (req, res) => {
           name: user.name,
           avatar: user.avatar
         };
-        jwt.sign(payload, keys.SecretKey, { expiresIn: 3600 * 24 }, (err, token) => {
-          if (!err) {
-            res.json({
-              success: true,
-              token: `Bearer ${token}`
-            });
-          } else {
-            res.json({ error: `Error accured while assigning token ${err}` });
+        jwt.sign(
+          payload,
+          keys.SecretKey,
+          { expiresIn: 3600 * 24 },
+          (err, token) => {
+            if (!err) {
+              res.json({
+                success: true,
+                token: `Bearer ${token}`
+              });
+            } else {
+              res.json({ error: `Error accured while assigning token ${err}` });
+            }
           }
-        });
+        );
         // res.json({ msg: 'Success' });
       } else {
         errors.password = 'password incorrect';
