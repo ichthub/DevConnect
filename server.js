@@ -48,15 +48,22 @@ app.use('/api/users', userRoute);
 app.use('/api/posts', postsRoute);
 app.use('/api/profile', profileRoute);
 // Serve static files when in production
-if (process.env.NODE_ENV === 'production') {
-  console.log('from production');
-  // Set static folder
-  app.use(express.static(path.join(__dirname, 'client', 'build')));
+// if (process.env.NODE_ENV === 'production') {
+//   console.log('from production');
+//   // Set static folder
+//   app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+//   });
+// }
+if (process.env.NODE_ENV === 'production') {
+  // handle routes in production
+  app.use(express.static('client/build')); // serving production assets like main.js and main.css
+  app.get('/*', (req, res) => {
+    // if the url is not recognizable by express, serve index.html
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
-
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`the server is running on port ${PORT}`));
